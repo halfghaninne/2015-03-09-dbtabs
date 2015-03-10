@@ -32,7 +32,9 @@ class Product
   end
   
   def self.all
-    DATABASE.execute("SELECT * FROM products")
+    results = DATABASE.execute("SELECT * FROM products")
+    
+    results.map { |record_hash| self.new(record_hash) }
   end
   
   def self.find(id)

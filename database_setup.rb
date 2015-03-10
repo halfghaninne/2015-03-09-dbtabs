@@ -1,6 +1,8 @@
 require 'pry'
 require 'sqlite3'
 
+# DATABASE = SQLite3::Database.new("product_info.db")
+
 DATABASE.results_as_hash = true
 
 DATABASE.execute("CREATE TABLE IF NOT EXISTS products 
