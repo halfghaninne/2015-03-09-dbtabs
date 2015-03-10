@@ -5,6 +5,10 @@ require_relative 'database_setup.rb'
 
 class Product
   
+  attr_reader :id
+  
+  attr_accessor :gen_info, :tech_specs, :where_to_buy
+  
   def initialize(options)
     @id = options["id"].to_i
     @gen_info = options["gen_info"]

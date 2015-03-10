@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'pry'
 require 'sqlite3'
+require 'json'
 
 DATABASE = SQLite3::Database.new("product_info.db")
 
