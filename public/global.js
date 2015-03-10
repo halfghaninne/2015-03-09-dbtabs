@@ -1,7 +1,7 @@
 window.onload = function() {
   
   var allProducts = document.getElementById("all_products"); //=> HTML anchor element
-  allProducts.addEventListener("click", getAll ); //end of click listener 
+  allProducts.addEventListener("click", getAll ); //end of allProducts event listener
   
   function getAll() {
     var request = new XMLHttpRequest;
@@ -24,21 +24,30 @@ window.onload = function() {
         for (i = 0; i < allProds.length; i++) {
           
           var id_st = allProds[i].id.toString();
-          
-          innerHtmlString = ("<li><a href='/product_info/" + id_st + "'>" + allProds[i].gen_info.split(":")[0] + "</a></li>");
+ 
+          innerHtmlString = ("<li id=\'li" + id_st + "\'>");
+          innerHtmlString.concat("<a href=\'/product_info/" + id_st + "\' id=\'a" + id_st "\'>");
+          innerHtmlString.concat(allProds[i].gen_info.split(":")[0]);
+          innerHtmlString.concat("</a></li>");
           var existingHtml = list.innerHTML;
-          list.innerHTML = existingHtml.concat(innerHtmlString) ;
+          list.innerHTML = existingHtml.concat(innerHtmlString);
           
-          // var listItem = document.createElement("li");
-          // var innerLink = document.createElement("a");
-          //
-          // innerLink.setAttribute("href", "/product_info/" + product.id);
-          // innerLink.innerHTML = product.gen_info ;
-          //
-          // listItem.appendChild(innerLink);
-          // productDiv.appendChild(list);
-        }; //end of for loop     
-    }); //end of eventListener function
+          //************* show product information *****************// 
+          prodLink = document.getElementById("a" + id_st);
+          listItem = document.getElementById("li" + id_st);
+          prodLink.addEventListener("click", function() {
+            var genInfo = "<div id='gen_info' class='tab_content'><p>" + allProds[i].gen_info.split(":")[1] + "</p></div>";
+            var techSpecs = "<div id='tech_specs' class='tab_content'><p>" + allProds[i].tech_specs + "</p></div>";
+            var whereToBuy = "<div id='where_to_buy' class='tab_content'><p>" allProds[i].where_to_buy + "</p></div>";
+            var existingListItemHtml = listItem.innerHTML;
+            listItem.innerHTML = existingListItemHtml.concat( genInfo + techSpecs + whereToBuy )
+          }); //end of prodLink eventListener
+          //******************************************************//  
+
+        }; //end of for loop  
+        
+       
+    }); //end of request eventListener function
   }; //end of getAll
   
 } //end of window.onload
