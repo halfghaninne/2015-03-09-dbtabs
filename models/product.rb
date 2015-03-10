@@ -24,10 +24,10 @@ class Product
   
   def to_hash
     {
-      id: id,
-      gen_info: gen_info,
-      tech_specs: tech_specs,
-      where_to_buy: where_to_buy
+      id: @id,
+      gen_info: @gen_info,
+      tech_specs: @tech_specs,
+      where_to_buy: @where_to_buy
     }
   end
   
@@ -48,5 +48,3 @@ class Product
   end
   
 end #end of class
-
-binding.pry
