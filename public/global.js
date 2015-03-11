@@ -36,7 +36,7 @@ window.onload = function() {
           prodLink = document.getElementById("a" + id_st);
           listItem = document.getElementById("li" + id_st);
           var existingListItemAnchorHtml = listItem.innerHTML
-          prodLink.addEventListener("click", function(){ infoAppears(i); }); 
+          prodLink.addEventListener("click", infoAppears(i)); 
           
           }; //end of for loop 
          
