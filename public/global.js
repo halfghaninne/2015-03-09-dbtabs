@@ -24,29 +24,38 @@ window.onload = function() {
         for (i = 0; i < allProds.length; i++) {
           
           var id_st = allProds[i].id.toString();
+          var prod_name = allProds[i].gen_info.split(":")[0];
  
-          innerHtmlString = ("<li id=\'li" + id_st + "\'>");
-          innerHtmlString.concat("<a href=\'/product_info/" + id_st + "\' id=\'a" + id_st "\'>");
-          innerHtmlString.concat(allProds[i].gen_info.split(":")[0]);
-          innerHtmlString.concat("</a></li>");
+          var innerHtmlString = "<li id = 'li" + id_st + "'><a href = 'javascript:void(0)' id = 'a" + id_st + "'>" + prod_name + "</a></li>";
           var existingHtml = list.innerHTML;
           list.innerHTML = existingHtml.concat(innerHtmlString);
           
           //************* show product information *****************// 
+          //******************************************************// 
+          
           prodLink = document.getElementById("a" + id_st);
           listItem = document.getElementById("li" + id_st);
-          prodLink.addEventListener("click", function() {
-            var genInfo = "<div id='gen_info' class='tab_content'><p>" + allProds[i].gen_info.split(":")[1] + "</p></div>";
-            var techSpecs = "<div id='tech_specs' class='tab_content'><p>" + allProds[i].tech_specs + "</p></div>";
-            var whereToBuy = "<div id='where_to_buy' class='tab_content'><p>" allProds[i].where_to_buy + "</p></div>";
-            var existingListItemHtml = listItem.innerHTML;
-            listItem.innerHTML = existingListItemHtml.concat( genInfo + techSpecs + whereToBuy )
-          }); //end of prodLink eventListener
-          //******************************************************//  
+          var existingListItemAnchorHtml = listItem.innerHTML
+          prodLink.addEventListener("click", function(){ infoAppears(i); }); 
+          
+          }; //end of for loop 
+         
+          function infoAppears (i) {
+              // var prodInfoRequest = new XMLHttpRequest;
+              // prodInfoRequest.open("post", "/product_info/" + id_st );
+              // prodInfoRequest.send();
+              // prodInfoRequest.addEventListener("load", function() {
+              //   var product = JSON.parse(this.response)
+                var genInfo = "<div id='gen_info' class='tab_content'><p>" + allProds[i].gen_info.split(":")[1] + "</p></div>";
+                var techSpecs = "<div id='tech_specs' class='tab_content'><p>" + allProds[i].tech_specs + "</p></div>";
+                var whereToBuy = "<div id='where_to_buy' class='tab_content'><p>" + allProds[i].where_to_buy + "</p></div>";
 
-        }; //end of for loop  
-        
-       
+                var newString = existingListItemAnchorHtml.concat( genInfo + techSpecs + whereToBuy );
+                listItem.innerHTML = newString;
+            }; //end of infoAppears
+            
+            //******************************************************// 
+            //******************************************************// 
     }); //end of request eventListener function
   }; //end of getAll
   

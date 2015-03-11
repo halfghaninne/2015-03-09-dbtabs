@@ -18,3 +18,10 @@ post "/all" do
   products_hash = all_products.map {|p| p.to_hash}
   products_hash.to_json
 end
+
+post "/product_info/:id" do
+  id = params[:id]
+  
+  product = Product.find(id)
+  product.to_hash.to_json
+end
